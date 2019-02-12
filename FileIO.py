@@ -9,14 +9,15 @@ class fileIO:
     def load(self, filename, lines):       
         
         try:
-            self.file = open(self.filename, "r+")
+            self.file = open(self.filename, "r")
             print("\n\n\n\n<<<<File contents begin here!>>>>\n\n\n\n")
             for ln in self.file:
                 print(ln)
                 lines.append(ln)
                 self.no += 1
             print("\n\n\n\n<<<< contents of " + self.filename + " end here! >>>>\n\n\n\nRead " + str(self.no + 1) + " lines.")
-
+            self.file.close()
+            self.file.open(self.filename, "w")
         except FileNotFoundError:
             print("File not found. Creating now")
             self.file = open(self.filename, "w")
