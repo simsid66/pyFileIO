@@ -21,10 +21,6 @@ class fileIO:
             print("File not found. Creating now")
             self.file = open(self.filename, "w")
 
-    def close(self):
-        self.file.write(self.toStr(self.lines))
-        self.file.close()
-
     def refresh(self, new):
         self.lines = list()
         self.filename = new
@@ -42,7 +38,7 @@ class fileIO:
     def searchForLineNumber(self, searchStr):
         b = 0
         while (b < self.no):
-            if self.lines[b] == searchStr:
+            if self.lines[b].strip() == searchStr.strip():
                 break
         if b < self.no:
             return b + 1
@@ -51,13 +47,13 @@ class fileIO:
 
     def addXMLTag(self, name, closing, indentLev):
         if closing:
-            self.lines.append(self.indent(indentLev) + "</" + name + ">")
+            self.lines.append("\n"+self.indent(indentLev) + "</" + name + ">")
         else:
-            self.lines.append(self.indent(indentLev) + "<" + name + ">")
+            self.lines.append("\n"+self.indent(indentLev) + "<" + name + ">")
 
     
     def addLine(self, str):
-        self.lines.append(str)
+        self.lines.append("\n" + str)
     
     def addLineAtIndex(self, str, index):
         self.lines.insert(index, str)
@@ -78,3 +74,10 @@ class fileIO:
             str += " "
             i += 1
         return str
+
+    def contentsAsStr(self):
+        return self.toStr(self.lines)
+
+    def close(self):
+        self.file.write(self.toStr(self.lines))
+        self.file.close()
