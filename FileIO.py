@@ -17,7 +17,7 @@ class fileIO:
                 self.no += 1
             print("\n\n\n\n<<<< contents of " + self.filename + " end here! >>>>\n\n\n\nRead " + str(self.no + 1) + " lines.")
             self.file.close()
-            self.file.open(self.filename, "w")
+            self.file = open(self.filename, "w")
         except FileNotFoundError:
             print("File not found. Creating now")
             self.file = open(self.filename, "w")
