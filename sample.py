@@ -20,3 +20,5 @@ def main():
     
     file.addXMLTag("html", True, 0)
     file.close()
+
+main()
